@@ -1,0 +1,7 @@
+{
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "*.tpp": "cpp",
+        "vector": "cpp"
+    }
+}
