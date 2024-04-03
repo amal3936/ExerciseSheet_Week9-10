@@ -87,38 +87,6 @@ void Graph::addWeightedEdge(int u, int v, int w) {
 	weight[u][v] = w;
 }
 
-// void Graph::dijkstra(int s, vector < int >&path, vector < int >&dist) {
-// 	struct pair_comp {
-// 		constexpr bool operator()( pair<int, int> const& a, pair<int, int> const& b) const noexcept {
-// 			return a.first > b.first;
-// 		}
-// 	};
-// 	priority_queue < pair<int, int>, vector<pair<int, int>>, pair_comp>q;
-// 	vector < bool >visited(adj.size());
-
-// 	for (int v = 0; v < adj.size(); ++v) {
-// 		dist[v] = INFINITY;
-// 		visited[v] = false;
-// 		path[v] = -1;
-// 	}
-// 	dist[s] = 0;
-// 	q.push(make_pair(dist[s], s));
-
-// 	while (!q.empty()) {
-// 		int u = q.top().second;
-// 		q.pop();
-// 		visited[u] = true;
-// 		for (auto v:adj[u]) {
-// 			if (!visited[v] && dist[u] != INT_MAX
-// 					&& dist[u] + weight[u][v] < dist[v]) {
-// 				dist[v] = dist[u] + weight[u][v];
-// 				path[v] = u;
-// 				q.push(make_pair(dist[v], v));
-// 			}
-// 		}
-// 	}
-// }
-
 void Graph::dijkstra(int start, int goal, vector<int>& path, vector<int>& dist) {
     // Sammenligner knuder som der bruges i prioriteringskøen
     struct pair_comp {
