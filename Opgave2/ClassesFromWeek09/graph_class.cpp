@@ -271,23 +271,23 @@ void Graph::bellmanFord(int s, vector<int>& path, vector<int>& dist) {
     for (int i = 0; i < V; ++i) {												//O(V)
 		if (i == s)
 		{
-        	dist[i] = 0;
+        	dist[i] = 0; // Sætter afstanden fra startknuden til sig selv til 0
     	}
 		else
 		{
-        	dist[i] = INFINITY;
+        	dist[i] = INFINITY; // Sætter alle andre afstande til uendelig
     	}
-        path[i] = 1;
+        path[i] = 1; // Initialiserer stien til alle knuder
     }
 												
     for (int u = 0; u < V; u++) {												//O(V*u)
         for (auto v : adj[u]) {
-            if (dist[u] != INFINITY && dist[u] + weight[u][v] < dist[v]) {
+            if (dist[u] != INFINITY && dist[u] + weight[u][v] < dist[v]) { // Opdaterer afstanden, hvis der findes en kortere vej
                 dist[v] = dist[u] + weight[u][v];
-                path[v] = u;
+                path[v] = u; // Opdaterer stien
 	        }
-			if (dist[u] != INFINITY && dist[u] + weight[u][v] < 0) {
-                cout << "Negative cycle!" << endl;
+			if (dist[u] != INFINITY && dist[u] + weight[u][v] < 0) { // Tjekker for negative cykler
+                cout << "Negative cycle!" << endl; // Udskriver en fejlmeddelelse
             }
         }
     }

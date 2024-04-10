@@ -146,37 +146,45 @@ void Graph::dijkstra(int s, vector<int> &path, vector<int> &dist)
 
 void Graph::dijkstra_dag(int s, vector<int> &path, vector<int> &dist)
 {
+	// Comparator funktion som bruges i prioritetskøen for Dijkstra
 	struct pair_comp
 	{
 		constexpr bool operator()(pair<int, int> const &a, pair<int, int> const &b) const noexcept
 		{
-			return a.first > b.first;
+			return a.first > b.first; // Sammenligner et par baseret på første element i stigende rækkefølge
 		}
 	};
+	
+	// Topologisk sortering af grafen
 	vector<int> topo_sort = topologicalSort(s);
-	vector<bool> visited(adj.size());
+	vector<bool> visited(adj.size()); // array til at spore besøgte knuder
 
+	// Initialiser afstande og stier
 	for (int v = 0; v < adj.size(); ++v)
 	{
-		dist[v] = INFINITY;
-		visited[v] = false;
-		path[v] = -1;
+		dist[v] = INFINITY; // Sæt afstand til uendelig
+		visited[v] = false; // Markér knude som ikke besøgt
+		path[v] = -1;  // Ingen knude er endnu besøgt
 	}
-	dist[s] = 0;
+	dist[s] = 0; // Afstand fra startknuden til sig selv er 0
 
+	// for-loop gennem knuder i topologisk sortering
 	for (auto u : topo_sort)
 	{
-		visited[u] = true;
+		visited[u] = true; // Marker knuden som besøgt
+		// Opdater afstande og stier til naboknuder
 		for (auto v : adj[u])
 		{
+			// Opdaterer afstanden, hvis der findes en kortere vej vha u
 			if (!visited[v] && dist[u] != INT_MAX && dist[u] + weight[u][v] < dist[v])
 			{
-				dist[v] = dist[u] + weight[u][v];
-				path[v] = u;
+				dist[v] = dist[u] + weight[u][v]; // Opdater afstanden
+				path[v] = u; // Opdater stien 
 			}
 		}
 	}
 }
+
 
 void Graph::dijkstra_nopq(int s, vector<int> &path, vector<int> &dist)
 {
